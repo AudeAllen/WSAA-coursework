@@ -2,7 +2,7 @@ import requests
 import json
 url = "http://andrewbeatty1.pythonanywhere.com/books"
 
-def getallbooks():
+def getAllBooks():
       response = requests.get(url)  
       return response.json()
 
