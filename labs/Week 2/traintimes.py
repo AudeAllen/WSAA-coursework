@@ -28,7 +28,7 @@ with open("trainxml.xml","w") as xmlfp:
 # I had an issue with blank lines in the file so found solution at
 # https://stackoverflow.com/questions/3348460/csv-file-written-with-python-has-blank-lines-between-each-row
 # adding the newline= '' parameter
-with  open('week02_train.csv', mode='w', newline='') as train_file:
+with  open('labs/Lab_output/week02_train.csv', mode='w', newline='') as train_file:
     train_writer = csv.writer(train_file, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
     objTrainPositionsNodes = doc.getElementsByTagName("objTrainPositions")

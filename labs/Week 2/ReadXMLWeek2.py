@@ -27,7 +27,7 @@ for objTrainPositionsNode in objTrainPositionsNodes:
         print (TrainLatitude)
 
 
-with  open('week03_train.csv', mode='w', newline='') as train_file:
+with  open('labs/Lab_output/week03_train.csv', mode='w', newline='') as train_file:
          train_writer = csv.writer(train_file, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL) 
          objTrainPositionsNodes = doc.getElementsByTagName("objTrainPositions")
          for objTrainPositionsNode in objTrainPositionsNodes:    
@@ -39,7 +39,7 @@ with  open('week03_train.csv', mode='w', newline='') as train_file:
 
 
 
-with  open('week03_train1.csv', mode='w', newline='') as train_file:
+with  open('labs/Lab_output/week03_train1.csv', mode='w', newline='') as train_file:
          train_writer = csv.writer(train_file, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL) 
          objTrainPositionsNodes = doc.getElementsByTagName("objTrainPositions")
          for objTrainPositionsNode in objTrainPositionsNodes:    
@@ -51,7 +51,7 @@ with  open('week03_train1.csv', mode='w', newline='') as train_file:
                train_writer.writerow(dataList) 
 
 
-with  open('week03_train_D.csv', mode='w', newline='') as train_file:
+with  open('labs/Lab_output/week03_train_D.csv', mode='w', newline='') as train_file:
          train_writer = csv.writer(train_file, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL) 
          objTrainPositionsNodes = doc.getElementsByTagName("objTrainPositions")
          for objTrainPositionsNode in objTrainPositionsNodes:    
