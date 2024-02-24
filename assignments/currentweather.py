@@ -37,6 +37,8 @@ current_units = data["current"]
 
 wind_speed_10m = current_units["wind_speed_10m"]
 
+
+# Print out result
 print (f' Your current wind speed is: {wind_speed_10m}') 
  	
 
