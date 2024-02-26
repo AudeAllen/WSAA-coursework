@@ -1,0 +1,94 @@
+{
+    "payload": {
+        "allShortcutsEnabled": false,
+        "path": "labs",
+        "repo": {
+            "id": 753705577,
+            "defaultBranch": "main",
+            "name": "WSAA-coursework",
+            "ownerLogin": "AudeAllen",
+            "currentUserCanPush": false,
+            "isFork": false,
+            "isEmpty": false,
+            "createdAt": "2024-02-06T16:36:27.000Z",
+            "ownerAvatar": "https://avatars.githubusercontent.com/u/123590406?v=4",
+            "public": true,
+            "private": false,
+            "isOrgOwned": false
+        },
+        "currentUser": null,
+        "refInfo": {
+            "name": "main",
+            "listCacheKey": "v0:1707237388.283019",
+            "canEdit": false,
+            "refType": "branch",
+            "currentOid": "a7cc40ea96d0042df596c9287852981c582c1069"
+        },
+        "tree": {
+            "items": [
+                {
+                    "name": "Lab_output",
+                    "path": "labs/Lab_output",
+                    "contentType": "directory"
+                },
+                {
+                    "name": "Week 2",
+                    "path": "labs/Week 2",
+                    "contentType": "directory"
+                },
+                {
+                    "name": "Week 4",
+                    "path": "labs/Week 4",
+                    "contentType": "directory"
+                }
+            ],
+            "templateDirectorySuggestionUrl": null,
+            "readme": null,
+            "totalCount": 3,
+            "showBranchInfobar": false
+        },
+        "fileTree": {
+            "": {
+                "items": [
+                    {
+                        "name": "assignments",
+                        "path": "assignments",
+                        "contentType": "directory"
+                    },
+                    {
+                        "name": "labs",
+                        "path": "labs",
+                        "contentType": "directory"
+                    },
+                    {
+                        "name": ".gitignore",
+                        "path": ".gitignore",
+                        "contentType": "file"
+                    },
+                    {
+                        "name": "README.md",
+                        "path": "README.md",
+                        "contentType": "file"
+                    }
+                ],
+                "totalCount": 4
+            }
+        },
+        "fileTreeProcessingTime": 1.471212,
+        "foldersToFetch": [],
+        "treeExpanded": true,
+        "symbolsExpanded": false,
+        "csrf_tokens": {
+            "/AudeAllen/WSAA-coursework/branches": {
+                "post": "lfVQ4UYCu4Kmo8sVS2dYd2v4nJvVNMbGAPTuuxIsfOcIBFYap3ckuiK8kAPHj6OAgPeT7bjRhVRIkHj5x-rmbQ"
+            },
+            "/AudeAllen/WSAA-coursework/branches/fetch_and_merge/main": {
+                "post": "_iC7N_iiiiLFn0TUQi57be6nMwqW_zhD40sCCbISxdCO1nwmjaSTVYIrjGvrT2gSxHpg21cTDvIQt3rE38Y1aA"
+            },
+            "/AudeAllen/WSAA-coursework/branches/fetch_and_merge/main?discard_changes=true": {
+                "post": "mPcvnM-JuY1MebBDPthQlmaBhVnIM3Jcf6obGZPcKufoAeiNuo-g-gvNePyXuUPpTFzWiAnfRO2MVmPU_gjaXw"
+            }
+        }
+    },
+    "title": "WSAA-coursework/labs at main \u00b7 AudeAllen/WSAA-coursework"
+}

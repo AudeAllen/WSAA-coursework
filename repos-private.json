@@ -1,0 +1,124 @@
+{
+    "payload": {
+        "allShortcutsEnabled": false,
+        "path": "labs/Lab_output",
+        "repo": {
+            "id": 753705577,
+            "defaultBranch": "main",
+            "name": "WSAA-coursework",
+            "ownerLogin": "AudeAllen",
+            "currentUserCanPush": false,
+            "isFork": false,
+            "isEmpty": false,
+            "createdAt": "2024-02-06T16:36:27.000Z",
+            "ownerAvatar": "https://avatars.githubusercontent.com/u/123590406?v=4",
+            "public": true,
+            "private": false,
+            "isOrgOwned": false
+        },
+        "currentUser": null,
+        "refInfo": {
+            "name": "main",
+            "listCacheKey": "v0:1707237388.283019",
+            "canEdit": false,
+            "refType": "branch",
+            "currentOid": "a7cc40ea96d0042df596c9287852981c582c1069"
+        },
+        "tree": {
+            "items": [
+                {
+                    "name": "cso-formatted.json",
+                    "path": "labs/Lab_output/cso-formatted.json",
+                    "contentType": "file"
+                },
+                {
+                    "name": "week02_train.csv",
+                    "path": "labs/Lab_output/week02_train.csv",
+                    "contentType": "file"
+                },
+                {
+                    "name": "week03_train.csv",
+                    "path": "labs/Lab_output/week03_train.csv",
+                    "contentType": "file"
+                },
+                {
+                    "name": "week03_train1.csv",
+                    "path": "labs/Lab_output/week03_train1.csv",
+                    "contentType": "file"
+                },
+                {
+                    "name": "week03_train_D.csv",
+                    "path": "labs/Lab_output/week03_train_D.csv",
+                    "contentType": "file"
+                }
+            ],
+            "templateDirectorySuggestionUrl": null,
+            "readme": null,
+            "totalCount": 5,
+            "showBranchInfobar": false
+        },
+        "fileTree": {
+            "labs": {
+                "items": [
+                    {
+                        "name": "Lab_output",
+                        "path": "labs/Lab_output",
+                        "contentType": "directory"
+                    },
+                    {
+                        "name": "Week 2",
+                        "path": "labs/Week 2",
+                        "contentType": "directory"
+                    },
+                    {
+                        "name": "Week 4",
+                        "path": "labs/Week 4",
+                        "contentType": "directory"
+                    }
+                ],
+                "totalCount": 3
+            },
+            "": {
+                "items": [
+                    {
+                        "name": "assignments",
+                        "path": "assignments",
+                        "contentType": "directory"
+                    },
+                    {
+                        "name": "labs",
+                        "path": "labs",
+                        "contentType": "directory"
+                    },
+                    {
+                        "name": ".gitignore",
+                        "path": ".gitignore",
+                        "contentType": "file"
+                    },
+                    {
+                        "name": "README.md",
+                        "path": "README.md",
+                        "contentType": "file"
+                    }
+                ],
+                "totalCount": 4
+            }
+        },
+        "fileTreeProcessingTime": 2.40109,
+        "foldersToFetch": [],
+        "treeExpanded": true,
+        "symbolsExpanded": false,
+        "csrf_tokens": {
+            "/AudeAllen/WSAA-coursework/branches": {
+                "post": "yNjt3f691ZBWRyjtWMVQGxR-_1eWRqHr65B2RDReQeiui-kr1yS5Wgh6WNmGxjNGNnPLENFG_i0uXzR4Yf5IkA"
+            },
+            "/AudeAllen/WSAA-coursework/branches/fetch_and_merge/main": {
+                "post": "rnUDOho6q7xgiMwIWPTqasPoryI0cJn54fyJGt4gJjporESOXYAJdY9uagy9IzRQOm8_-KheT2Xa8dT-hn2Shw"
+            },
+            "/AudeAllen/WSAA-coursework/branches/fetch_and_merge/main?discard_changes=true": {
+                "post": "Qa54H0FMCg3XXWXpAdAK-1rRJbUzeuCuK3i-eTfEODOHdz-rBvaoxDi7w-3kB9TBo1a1b69UNjIQdeOdb5mMjg"
+            }
+        }
+    },
+    "title": "WSAA-coursework/labs/Lab_output at main \u00b7 AudeAllen/WSAA-coursework"
+}
