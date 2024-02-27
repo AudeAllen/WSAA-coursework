@@ -1,7 +1,7 @@
 {
     "payload": {
         "allShortcutsEnabled": false,
-        "path": "labs",
+        "path": "assignments",
         "repo": {
             "id": 753705577,
             "defaultBranch": "main",
@@ -22,24 +22,24 @@
             "listCacheKey": "v0:1707237388.283019",
             "canEdit": false,
             "refType": "branch",
-            "currentOid": "a7cc40ea96d0042df596c9287852981c582c1069"
+            "currentOid": "6d2d4d31af67fe158d56ca45612e886b13f12792"
         },
         "tree": {
             "items": [
                 {
-                    "name": "Lab_output",
-                    "path": "labs/Lab_output",
+                    "name": "assignment-outputs",
+                    "path": "assignments/assignment-outputs",
                     "contentType": "directory"
                 },
                 {
-                    "name": "Week 2",
-                    "path": "labs/Week 2",
-                    "contentType": "directory"
+                    "name": "assignment03-cso.py",
+                    "path": "assignments/assignment03-cso.py",
+                    "contentType": "file"
                 },
                 {
-                    "name": "Week 4",
-                    "path": "labs/Week 4",
-                    "contentType": "directory"
+                    "name": "currentweather.py",
+                    "path": "assignments/currentweather.py",
+                    "contentType": "file"
                 }
             ],
             "templateDirectorySuggestionUrl": null,
@@ -69,26 +69,46 @@
                         "name": "README.md",
                         "path": "README.md",
                         "contentType": "file"
+                    },
+                    {
+                        "name": "document.pdf",
+                        "path": "document.pdf",
+                        "contentType": "file"
+                    },
+                    {
+                        "name": "repos-private.json",
+                        "path": "repos-private.json",
+                        "contentType": "file"
+                    },
+                    {
+                        "name": "repos-putrepo.json",
+                        "path": "repos-putrepo.json",
+                        "contentType": "file"
+                    },
+                    {
+                        "name": "wsaa-code.json",
+                        "path": "wsaa-code.json",
+                        "contentType": "file"
                     }
                 ],
-                "totalCount": 4
+                "totalCount": 8
             }
         },
-        "fileTreeProcessingTime": 1.471212,
+        "fileTreeProcessingTime": 1.5192809999999999,
         "foldersToFetch": [],
         "treeExpanded": true,
         "symbolsExpanded": false,
         "csrf_tokens": {
             "/AudeAllen/WSAA-coursework/branches": {
-                "post": "lfVQ4UYCu4Kmo8sVS2dYd2v4nJvVNMbGAPTuuxIsfOcIBFYap3ckuiK8kAPHj6OAgPeT7bjRhVRIkHj5x-rmbQ"
+                "post": "jwDh12yniUN1zYongRD-k87ey3lLxd0ovjE0mQvvlFjy6m_7Q775VftyxBb69h5uuCl2ZHdJYOMofVClB_TRdg"
             },
             "/AudeAllen/WSAA-coursework/branches/fetch_and_merge/main": {
-                "post": "_iC7N_iiiiLFn0TUQi57be6nMwqW_zhD40sCCbISxdCO1nwmjaSTVYIrjGvrT2gSxHpg21cTDvIQt3rE38Y1aA"
+                "post": "zu5Jj4MM0ZlyzbhCso-KQ2KABEXfdRifbcxdoRIRNqkyp8qW_22qZmrRqZF76ANhCgjn09wf0iqKzotmShZ-Tg"
             },
             "/AudeAllen/WSAA-coursework/branches/fetch_and_merge/main?discard_changes=true": {
-                "post": "mPcvnM-JuY1MebBDPthQlmaBhVnIM3Jcf6obGZPcKufoAeiNuo-g-gvNePyXuUPpTFzWiAnfRO2MVmPU_gjaXw"
+                "post": "sAQnsQBFQBg4JgObEplkPtw0ihcKlFs3k6weTlLKHHtMTaSofCQ75yA6Ekjb_u0ctLxpgQn-kYJ0rsiJCs1UnA"
             }
         }
     },
-    "title": "WSAA-coursework/labs at main \u00b7 AudeAllen/WSAA-coursework"
+    "title": "WSAA-coursework/assignments at main \u00b7 AudeAllen/WSAA-coursework"
 }

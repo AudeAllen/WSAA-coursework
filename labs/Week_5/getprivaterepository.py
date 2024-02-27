@@ -2,14 +2,14 @@ import requests
 import json
 #from config import config as cfg
 
-filename = "repos-private.json"
+filename = "labs/Lab_output/repos-private.json"
 
 #url = 'https://api.github.com/repos/andrewbeattycourseware/datarepresentation/contents/code'
 url = 'https://github.com/AudeAllen/WSAA-coursework/tree/main/assignments'
 
 # this token is no longer valid, becuase it has been pushed to GitHub
 # GitHub detects it and invalidates it automatically for security
-apikey='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'
+apikey='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'
 # the more basic way of setting authorization
 #headers = {'Authorization': 'token ' + apikey}
 #response = requests.get(url, headers= headers)

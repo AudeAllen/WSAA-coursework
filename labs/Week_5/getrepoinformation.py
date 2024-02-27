@@ -2,13 +2,11 @@ import requests
 import json
 
 #filename = "repos-public.json"
-filename = "wsaa-code.json"
+filename = "labs/Lab_output/wsaa-code.json"
 
 #url = 'https://api.github.com/users/andrewbeattycourseware/repos?per_page=100'
-url = 'https://github.com/AudeAllen/'
+url = 'https://api.github.com/repos/andrewbeattycourseware/wsaa-course-material/contents/code'
 #url = 'https://api.github.com/repos/andrewbeattycourseware/aprivateone'
-
-
 
 response = requests.get(url,verify = False)
 print (response.status_code)
