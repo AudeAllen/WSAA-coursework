@@ -1,0 +1,25 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Weather App - Web Services and Applications</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+   <button type="button" onclick="alert('Add New Task!')">Task List for Audrey Allen!</button>
+</head>
+<body>
+   <div class="container">     
+       <h1>Web Services and Applications</h1>
+       <h1>Weather App and Task App</h1>
+        <form action="/weather" method="post">
+           <label for="city">Enter city name:</label>
+           <input type="text" id="city" name="city" required>
+           <button type="submit">Get Weather</button>
+        <div class="background">
+            <img src="/static/assets/Learn-about-Weather.jpg" alt="" class="desktop-background">
+        </div>   
+       </form>
+   </div>
+</body>
+</html>
