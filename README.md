@@ -13,10 +13,8 @@ Here I will explain how I came to the solution of given tasks, reference the sou
 # Table of contents - Assignments
 * [Software needed to run the assignments](#software-needed-to-run-the-assignments)	
 * [Assignments](#assignments)   
-    * [currentweather](#currentweather)
-    * [assignment03-cso](#assignment03-cso)
-    * [assignment04-github](#assignment04-github)
-
+    * [Deal Cards](#deal-cards)
+   
 
 
 
@@ -32,26 +30,7 @@ Please see below for the  different tools and packages that I am using for the t
 
 Assignments
 ======
-### ***currentweather***
+### ***Deal Cards***
 
 
-Write a python program called currentweather.py that will print out the current temperature on the console (and only the temperature)
 
-Print out the current wind direction (10m) as well
-  
-
-
-======
-### ***assignment03-cso***
-
-Write a program that retrieves the dataset for the "exchequer account (historical series)" from the CSO,
-and stores it into a file called "cso.json".
-
-======
-### ***assignment04-github***
-
-Write a program in python that will read a file from a repository. 
-
-The program should then replace all the instances of the text "Andrew" with your name. 
-
-The program should then commit those changes and push the file back to the repository.
