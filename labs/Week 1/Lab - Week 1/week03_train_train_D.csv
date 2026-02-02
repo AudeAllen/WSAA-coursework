@@ -1,0 +1,6 @@
+TrainStatus,TrainLatitude,TrainLongitude,TrainCode,TrainDate,PublicMessage,Direction
+R,0,0,D220,02 Feb 2026,D220\n18:25 - Dublin Heuston to Portlaoise (-8 mins late)\nArrived Inchicore Advance Starter next stop Park West and Cherry Orchard,To Portlaoise
+R,53.1454,-7.06361,D218,02 Feb 2026,D218\n17:27 - Dublin Heuston to Portlaoise (-1 mins late)\nArrived Monasterevin next stop Portarlington,To Portlaoise
+R,53.3704,-6.50598,D918,02 Feb 2026,D918\n17:47 - Dublin Connolly to Maynooth (2 mins late)\nDeparted Leixlip (Louisa Bridge) next stop Maynooth,Northbound
+R,53.3725,-6.29869,D919,02 Feb 2026,D919\n18:17 - Dublin Connolly to Maynooth (-1 mins late)\nArrived Broombridge next stop Pelletstown,Northbound
+R,53.4175,-6.46483,D379,02 Feb 2026,D379\n18:18 - Clonsilla to M3 Parkway (-1 mins late)\nArrived Dunboyne next stop M3 Parkway,Northbound

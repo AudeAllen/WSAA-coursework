@@ -1,0 +1,6 @@
+TrainStatus,TrainLatitude,TrainLongitude,TrainCode,TrainDate,PublicMessage,Direction
+N,53.3464,-6.29461,D220,02 Feb 2026,D220\nDublin Heuston to Portlaoise\nExpected Departure 18:25,To Portlaoise
+R,0,0,D919,02 Feb 2026,D919\n18:17 - Dublin Connolly to Maynooth (1 mins late)\nDeparted North Strand Junction next stop Drumcondra,Northbound
+R,53.1454,-7.06361,D218,02 Feb 2026,D218\n17:27 - Dublin Heuston to Portlaoise (-1 mins late)\nArrived Monasterevin next stop Portarlington,To Portlaoise
+R,53.3743,-6.48624,D918,02 Feb 2026,D918\n17:47 - Dublin Connolly to Maynooth (0 mins late)\nArrived Leixlip (Confey) next stop Leixlip (Louisa Bridge),Northbound
+R,53.3853,-6.44205,D379,02 Feb 2026,D379\n18:18 - Clonsilla to M3 Parkway (0 mins late)\nArrived Hansfield next stop Dunboyne,Northbound

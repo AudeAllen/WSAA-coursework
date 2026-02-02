@@ -1,0 +1,51 @@
+TrainStatus,TrainLatitude,TrainLongitude,TrainCode,TrainDate,PublicMessage,Direction
+N,51.8491,-8.29956,B912,02 Feb 2026,B912\nCobh to Cork\nExpected Departure 18:30,To Cork
+N,51.8491,-8.29956,B930,02 Feb 2026,B930\nCobh to Cork\nExpected Departure 18:30,To Cork
+N,51.9018,-8.4582,B227,02 Feb 2026,B227\nCork to Thurles\nExpected Departure 18:25,To Thurles
+N,51.9018,-8.4582,B263,02 Feb 2026,B263\nCork to Charleville\nExpected Departure 18:35,To Charleville
+N,51.9018,-8.4582,B563,02 Feb 2026,B563\nCork to Midleton\nExpected Departure 18:30,To Midleton
+N,51.9018,-8.4582,B581,02 Feb 2026,B581\nCork to Midleton\nExpected Departure 18:30,To Midleton
+N,52.0595,-9.50198,B338,02 Feb 2026,B338\nKillarney to Tralee\nExpected Departure 18:22,To Tralee
+N,52.2667,-7.1183,A527,02 Feb 2026,A527\nWaterford to Dublin Heuston\nExpected Departure 18:25,To Dublin Heuston
+N,52.271,-9.69846,B349,02 Feb 2026,B349\nTralee to Mallow\nExpected Departure 18:25,To Mallow
+N,53.2736,-9.04696,A741,02 Feb 2026,A741\nGalway to Athlone\nExpected Departure 18:18,To Athlone
+N,53.3464,-6.29461,A526,02 Feb 2026,A526\nDublin Heuston to Waterford\nExpected Departure 18:35,To Waterford
+N,53.3531,-6.24591,B126,02 Feb 2026,B126\nDublin Connolly to Drogheda\nExpected Departure 18:20,Northbound
+N,53.3531,-6.24591,E265,02 Feb 2026,E265\nDublin Connolly to Bray\nExpected Departure 18:29,Southbound
+N,53.7955,-9.50885,A811,02 Feb 2026,A811\nWestport to Dublin Heuston\nExpected Departure 18:30,To Dublin Heuston
+N,54.1085,-9.16146,A873,02 Feb 2026,A873\nBallina to Manulla Junction\nExpected Departure 18:20,To Manulla Junction
+R,0,0,A412,02 Feb 2026,A412\n17:25 - Dublin Heuston to Limerick (-5 mins late)\nDeparted PL102 next stop Ballybrophy,To Limerick
+R,0,0,D220,02 Feb 2026,D220\n18:25 - Dublin Heuston to Portlaoise (-8 mins late)\nArrived Inchicore Advance Starter next stop Park West and Cherry Orchard,To Portlaoise
+R,52.5009,-8.20003,A225,02 Feb 2026,A225\n18:02 - Charleville to Dublin Heuston (0 mins late)\nDeparted Limerick Junction next stop Thurles,To Dublin Heuston
+R,52.6766,-7.82189,A222,02 Feb 2026,A222\n17:05 - Dublin Heuston to Charleville (0 mins late)\nArrived Thurles next stop Limerick Junction,To Charleville
+R,53.0371,-7.30086,A223,02 Feb 2026,A223\n17:04 - Charleville to Dublin Heuston (-1 mins late)\nDeparted Portlaoise next stop Dublin Heuston,To Dublin Heuston
+R,53.1454,-7.06361,D218,02 Feb 2026,D218\n17:27 - Dublin Heuston to Portlaoise (-1 mins late)\nArrived Monasterevin next stop Portarlington,To Portlaoise
+R,53.146,-7.18055,A724,02 Feb 2026,A724\n17:31 - Dublin Heuston to Galway (0 mins late)\nDeparted Portarlington next stop Tullamore,To Galway
+R,53.1545,-6.96542,A524,02 Feb 2026,A524\n17:37 - Dublin Heuston to Waterford (3 mins late)\nDeparted Cherryville Junction next stop Athy,To Waterford
+R,53.1545,-6.96542,B801,02 Feb 2026,B801\n14:45 - Westport to Dublin Heuston (12 mins late)\nDeparted Cherryville Junction next stop Dublin Heuston,To Dublin Heuston
+R,53.1855,-6.80807,A224,02 Feb 2026,A224\n18:00 - Dublin Heuston to Charleville (0 mins late)\nDeparted Newbridge next stop Ballybrophy,To Charleville
+R,53.2469,-6.66386,P223,02 Feb 2026,P223\n17:35 - Portlaoise to Dublin Heuston (7 mins late)\nDeparted Sallins next stop Hazelhatch,To Dublin Heuston
+R,53.2812,-6.12289,E264,02 Feb 2026,E264\n17:52 - Dublin Connolly to Bray (0 mins late)\nDeparted Glenageary next stop Dalkey,Southbound
+R,53.2812,-6.12289,E757,02 Feb 2026,E757\n18:11 - Bray to Dublin Connolly (-1 mins late)\nArrived Glenageary next stop Sandycove,Northbound
+R,53.3015,-8.74855,A718,02 Feb 2026,A718\n15:35 - Dublin Heuston to Galway (41 mins late)\nArrived Athenry next stop Galway,To Galway
+R,53.3206,-6.21112,E159,02 Feb 2026,E159\n18:09 - Dublin Connolly to Greystones (1 mins late)\nDeparted Sydney Parade next stop Booterstown,Southbound
+R,53.3281,-6.22116,E756,02 Feb 2026,E756\n17:51 - Bray to Dublin Connolly (0 mins late)\nArrived Sandymount next stop Lansdowne Road,Northbound
+R,53.3353,-6.45233,A808,02 Feb 2026,A808\n18:15 - Dublin Heuston to Westport (0 mins late)\nDeparted Adamstown next stop Tullamore,To Westport
+R,53.3363,-8.24081,A720,02 Feb 2026,A720\n16:30 - Dublin Heuston to Galway (10 mins late)\nDeparted Ballinasloe next stop Woodlawn,To Galway
+R,53.3363,-8.24081,A725,02 Feb 2026,A725\n17:20 - Galway to Dublin Heuston (9 mins late)\nDeparted Ballinasloe next stop Athlone,To Dublin Heuston
+R,53.3432,-8.47231,A710,02 Feb 2026,A710\n11:30 - Dublin Heuston to Galway (287 mins late)\nDeparted Woodlawn next stop Athenry,To Galway
+R,53.3432,-8.47231,A714,02 Feb 2026,A714\n13:30 - Dublin Heuston to Galway (168 mins late)\nDeparted Woodlawn next stop Athenry,To Galway
+R,53.3704,-6.50598,D918,02 Feb 2026,D918\n17:47 - Dublin Connolly to Maynooth (2 mins late)\nDeparted Leixlip (Louisa Bridge) next stop Maynooth,Northbound
+R,53.3725,-6.29869,D919,02 Feb 2026,D919\n18:17 - Dublin Connolly to Maynooth (-1 mins late)\nArrived Broombridge next stop Pelletstown,Northbound
+R,53.3755,-6.33135,P759,02 Feb 2026,P759\n17:52 - Maynooth to Dublin Connolly (5 mins late)\nArrived Ashtown next stop Pelletstown,Southbound
+R,53.378,-6.58993,A912,02 Feb 2026,A912\n17:05 - Dublin Connolly to Sligo (26 mins late)\nDeparted Maynooth next stop Kilcock,Northbound
+R,53.3831,-6.4242,P760,02 Feb 2026,P760\n18:10 - Maynooth to Dublin Connolly (-1 mins late)\nArrived Clonsilla next stop Coolmine,Southbound
+R,53.4175,-6.46483,D379,02 Feb 2026,D379\n18:18 - Clonsilla to M3 Parkway (-1 mins late)\nArrived Dunboyne next stop M3 Parkway,Northbound
+R,53.8591,-7.9164,A910,02 Feb 2026,A910\n16:05 - Dublin Connolly to Sligo (12 mins late)\nDeparted Dromod next stop Carrick on Shannon,Northbound
+R,53.8591,-7.9164,A913,02 Feb 2026,A913\n17:05 - Sligo to Dublin Connolly (15 mins late)\nDeparted Dromod next stop Longford,Southbound
+R,54.0007,-6.41291,A122,02 Feb 2026,A122\n18:00 - Drogheda to Belfast (1 mins late)\nDeparted Dundalk next stop Newry,Northbound
+T,52.5009,-8.20003,A445,02 Feb 2026,A445\n17:45 - Limerick to Limerick Junction(-1 mins late)\nTERMINATED Limerick Junction at 18:17,To Limerick Junction
+T,53.2043,-6.10046,E263,02 Feb 2026,E263\n17:31 - Dublin Connolly to Bray(0 mins late)\nTERMINATED Bray at 18:19,Southbound
+T,53.3531,-6.24591,A911,02 Feb 2026,A911\n15:05 - Sligo to Dublin Connolly(0 mins late)\nTERMINATED Dublin Connolly at 18:20,Southbound
+T,53.3531,-6.24591,E755,02 Feb 2026,E755\n17:20 - Greystones to Dublin Connolly(-4 mins late)\nTERMINATED Dublin Connolly at 18:16,Northbound
+T,54.2723,-8.48249,A908,02 Feb 2026,A908\n15:05 - Dublin Connolly to Sligo(-3 mins late)\nTERMINATED Sligo at 18:15,Northbound
