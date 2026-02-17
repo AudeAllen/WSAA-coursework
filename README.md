@@ -13,7 +13,8 @@ Here I will explain how I came to the solution of given tasks, reference the sou
 # Table of contents - Assignments
 * [Software needed to run the assignments](#software-needed-to-run-the-assignments)	
 * [Assignments](#assignments)   
-    * [Deal Cards](#deal-cards)
+    * [Assignment 01 Deal Cards](#assignment-01-deal-cards)
+    * [Assignment 03 Read CSO URL](#assignment-03-read-cso-url)
    
 
 
@@ -25,12 +26,23 @@ Please see below for the  different tools and packages that I am using for the t
 
 - Download Anaconda - Anaconda is a package that aims to simplify package management 
 - Download Visual Studio Code
-- Download Github - https://github.com/AudeAllen/Fundamentals-of-Data-Analysis---Tasks-and-Project.git
-- To run the tasks simply click on 'Run all' for tasks.ipynb. The project is a mix of code and markdown blocks which explain each part of each task. You can perform this action either in Visual Studio code or in Anconda in Jupyer Notebook.
+- Download Github - https://github.com/AudeAllen/WSAA-coursework
+
 
 Assignments
 ======
-### ***Deal Cards***
+### ***Assignment 01 Deal Cards***
+
+Deck of Cards API    https://deckofcardsapi.com/ <br /> 
+
+This is an API that simulates dealing a deck of cards<br /> 
+
+Write a program that "deals" (prints out) 5 cards<br /> 
+
+======
+### ***Assignment 03 Read CSO URL***
+
+Write a program that retrieves the dataset for the "exchequer account (historical series)" from the CSO, and stores it into a file called "cso.json"
 
 
 
