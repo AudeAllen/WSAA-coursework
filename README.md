@@ -15,7 +15,7 @@ Here I will explain how I came to the solution of given tasks, reference the sou
 * [Assignments](#assignments)   
     * [Assignment 01 Deal Cards](#assignment-01-deal-cards)
     * [Assignment 03 Read CSO URL](#assignment-03-read-cso-url)
-    * [Assignment 04 Authentication](#assignment-04-authenication)
+    * [Assignment 04 Authentication](#assignment-04-authentication)
    
 
 
