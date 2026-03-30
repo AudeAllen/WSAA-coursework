@@ -1,0 +1,40 @@
+// Utility function to show alerts
+function showAlert(message, type = 'info') {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type}`;
+    alertDiv.textContent = message;
+    
+    const container = document.querySelector('main');
+    if (container) {
+        container.insertBefore(alertDiv, container.firstChild);
+        
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+            alertDiv.remove();
+        }, 5000);
+    }
+}
+
+// Utility function for form validation
+function validateForm(formData) {
+    const requiredFields = ['first_name', 'last_name', 'dob', 'gender', 'phone', 'address'];
+    
+    for (let field of requiredFields) {
+        if (!formData[field] || formData[field].trim() === '') {
+            return { valid: false, message: `${field.replace('_', ' ').toUpperCase()} is required.` };
+        }
+    }
+    
+    return { valid: true };
+}
+
+// Disable buttons after submission to prevent double submission
+function disableButton(button) {
+    button.disabled = true;
+    button.textContent = 'Processing...';
+}
+
+function enableButton(button, originalText) {
+    button.disabled = false;
+    button.textContent = originalText;
+}

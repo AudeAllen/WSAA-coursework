@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Books</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+        crossorigin="anonymous">
+</head>
+<body class="p-4">
+
+    <h1>Books</h1>
+
+    <div class="mb-4">
+        <button class="btn btn-primary">Create a book</button>
+    </div>
+
+    <div class="mb-5">
+        <table class="table table-bordered">
+            <tr>
+                <th>id</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Harry Potter does something</td>
+                <td>JK Rowling</td>
+                <td>12</td>
+                <td><button class="btn btn-warning btn-sm">update</button></td>
+                <td><button class="btn btn-danger btn-sm">delete</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <h2>
+            <span>Create a</span>
+            <span style="display:none">Update this</span> Book
+        </h2>
+
+        <div class="mb-2">
+            <label for="id">id</label>
+            <input id="id" type="text" name="id" class="form-control">
+        </div>
+
+        <div class="mb-2">
+            <label for="title">Title</label>
+            <input id="title" type="text" name="title" class="form-control">
+        </div>
+
+        <div class="mb-2">
+            <label for="author">Author</label>
+            <input id="author" type="text" name="author" class="form-control">
+        </div>
+
+        <div class="mb-2">
+            <label for="price">Price</label>
+            <input id="price" type="number" name="price" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="status">Just to show select</label>
+            <select id="status" name="status" class="form-select">
+                <option value="instock">in stock</option>
+                <option value="outstock">out of stock</option>
+                <option value="other">out of print</option>
+            </select>
+        </div>
+
+        <span><button class="btn btn-success">Create</button></span>
+        <span><button class="btn btn-secondary" style="display:none">Update</button></span>
+    </div>
+
+</body>
+</html>

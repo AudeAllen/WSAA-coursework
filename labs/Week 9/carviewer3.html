@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Viewer AJAX</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 900px;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: left;
+        }
+        button {
+            margin: 4px 0;
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+        .form-row {
+            margin: 10px 0;
+        }
+        #createUpdateForm {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #999;
+            max-width: 500px;
+            display: none;
+        }
+        input, select {
+            padding: 6px;
+            width: 100%;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Books</h1>
+
+    <button id="button-showCreate" onclick="showCreate()">Create a Book</button>
+
+    <table id="bookTable">
+        <tr>
+            <th>id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </table>
+
+    <div id="createUpdateForm">
+        <h2>
+            <span id="createLabel">Create a</span>
+            <span id="updateLabel" style="display:none">Update this</span>
+            Book
+        </h2>
+
+        <div class="form-row">
+            <label>id</label><br>
+            <input type="text" name="id" disabled>
+        </div>
+
+        <div class="form-row">
+            <label>Title</label><br>
+            <input type="text" name="title">
+        </div>
+
+        <div class="form-row">
+            <label>Author</label><br>
+            <input type="text" name="author">
+        </div>
+
+        <div class="form-row">
+            <label>Price</label><br>
+            <input type="number" name="price">
+        </div>
+
+        <div class="form-row">
+            <label>Status</label><br>
+            <select name="status">
+                <option value="in stock">in stock</option>
+                <option value="out of stock">out of stock</option>
+                <option value="out of print">out of print</option>
+            </select>
+        </div>
+
+        <span><button id="button-doCreate" onclick="doCreate()">Create</button></span>
+        <span><button id="button-doUpdate" onclick="doUpdate()" style="display:none">Update</button></span>
+    </div>
+
+    <script>
+        const host = "http://andrewbeatty1.pythonanywhere.com";
+
+        function showCreate() {
+            document.getElementById("button-showCreate").style.display = "none";
+            document.getElementById("bookTable").style.display = "none";
+            document.getElementById("createUpdateForm").style.display = "block";
+
+            document.getElementById("createLabel").style.display = "inline";
+            document.getElementById("updateLabel").style.display = "none";
+            document.getElementById("button-doCreate").style.display = "inline-block";
+            document.getElementById("button-doUpdate").style.display = "none";
+
+            clearForm();
+            document.querySelector('input[name="id"]').disabled = true;
+        }
+
+        function showViewAll() {
+            document.getElementById("button-showCreate").style.display = "inline-block";
+            document.getElementById("bookTable").style.display = "table";
+            document.getElementById("createUpdateForm").style.display = "none";
+        }
+
+        function showUpdate(buttonElement) {
+            const rowElement = buttonElement.parentNode.parentNode;
+            const book = getBookFromRow(rowElement);
+
+            document.getElementById("button-showCreate").style.display = "none";
+            document.getElementById("bookTable").style.display = "none";
+            document.getElementById("createUpdateForm").style.display = "block";
+
+            document.getElementById("createLabel").style.display = "none";
+            document.getElementById("updateLabel").style.display = "inline";
+            document.getElementById("button-doCreate").style.display = "none";
+            document.getElementById("button-doUpdate").style.display = "inline-block";
+
+            populateFormWithBook(book);
+        }
+
+        function doCreate() {
+            const book = getBookFromForm();
+            createBook(book, processCreateResponse);
+        }
+
+        function doUpdate() {
+            const book = getBookFromForm();
+            updateBook(book, processUpdateResponse);
+        }
+
+        function doDelete(buttonElement) {
+            const rowElement = buttonElement.parentNode.parentNode;
+            const id = rowElement.getAttribute("id");
+            deleteBook(id, processDeleteResponse);
+        }
+
+        function clearForm() {
+            const form = document.getElementById("createUpdateForm");
+            form.querySelector('input[name="id"]').value = "";
+            form.querySelector('input[name="title"]').value = "";
+            form.querySelector('input[name="author"]').value = "";
+            form.querySelector('input[name="price"]').value = "";
+            form.querySelector('select[name="status"]').value = "in stock";
+        }
+
+        function getBookFromForm() {
+            const form = document.getElementById("createUpdateForm");
+            const book = {};
+            book.id = form.querySelector('input[name="id"]').value;
+            book.title = form.querySelector('input[name="title"]').value;
+            book.author = form.querySelector('input[name="author"]').value;
+            book.price = form.querySelector('input[name="price"]').value;
+            return book;
+        }
+
+        function populateFormWithBook(book) {
+            const form = document.getElementById("createUpdateForm");
+            form.querySelector('input[name="id"]').disabled = true;
+            form.querySelector('input[name="id"]').value = book.id;
+            form.querySelector('input[name="title"]').value = book.title;
+            form.querySelector('input[name="author"]').value = book.author;
+            form.querySelector('input[name="price"]').value = book.price;
+        }
+
+        function addBookToTable(book) {
+            const tableElement = document.getElementById("bookTable");
+            const rowElement = tableElement.insertRow(-1);
+            rowElement.setAttribute("id", book.id);
+
+            let cell1 = rowElement.insertCell(0);
+            cell1.textContent = book.id;
+
+            let cell2 = rowElement.insertCell(1);
+            cell2.textContent = book.title;
+
+            let cell3 = rowElement.insertCell(2);
+            cell3.textContent = book.author;
+
+            let cell4 = rowElement.insertCell(3);
+            cell4.textContent = book.price;
+
+            let cell5 = rowElement.insertCell(4);
+            cell5.innerHTML = '<button onclick="showUpdate(this)">Update</button>';
+
+            let cell6 = rowElement.insertCell(5);
+            cell6.innerHTML = '<button onclick="doDelete(this)">Delete</button>';
+        }
+
+        function setBookInRow(rowElement, book) {
+            rowElement.cells[0].textContent = book.id;
+            rowElement.cells[1].textContent = book.title;
+            rowElement.cells[2].textContent = book.author;
+            rowElement.cells[3].textContent = book.price;
+        }
+
+        function getBookFromRow(rowElement) {
+            const book = {};
+            book.id = rowElement.getAttribute("id");
+            book.title = rowElement.cells[1].textContent;
+            book.author = rowElement.cells[2].textContent;
+            book.price = rowElement.cells[3].textContent;
+            return book;
+        }
+
+        function clearTable() {
+            const table = document.getElementById("bookTable");
+            while (table.rows.length > 1) {
+                table.deleteRow(1);
+            }
+        }
+
+        function getAll(callback) {
+            $.ajax({
+                url: host + "/books",
+                method: "GET",
+                data: "",
+                dataType: "JSON",
+                success: function(result) {
+                    callback(result);
+                },
+                error: function(xhr, status, error) {
+                    console.log("error: " + status + " msg: " + error);
+                }
+            });
+        }
+
+        function createBook(book, callback) {
+            $.ajax({
+                url: host + "/books",
+                method: "POST",
+                data: JSON.stringify(book),
+                dataType: "JSON",
+                contentType: "application/json; charset=utf-8",
+                success: function(result) {
+                    callback(result);
+                },
+                error: function(xhr, status, error) {
+                    console.log("error: " + status + " msg: " + error);
+                }
+            });
+        }
+
+        function updateBook(book, callback) {
+            $.ajax({
+                url: host + "/books/" + encodeURI(book.id),
+                method: "PUT",
+                data: JSON.stringify(book),
+                dataType: "JSON",
+                contentType: "application/json; charset=utf-8",
+                success: function(result) {
+                    callback(result);
+                },
+                error: function(xhr, status, error) {
+                    console.log("error: " + status + " msg: " + error);
+                }
+            });
+        }
+
+        function deleteBook(id, callback) {
+            $.ajax({
+                url: host + "/books/" + encodeURI(id),
+                method: "DELETE",
+                data: "",
+                dataType: "JSON",
+                contentType: "application/json; charset=utf-8",
+                success: function(result) {
+                    callback(result, id);
+                },
+                error: function(xhr, status, error) {
+                    console.log("error: " + status + " msg: " + error);
+                }
+            });
+        }
+
+        function processGetAllResponse(result) {
+            clearTable();
+            for (book of result) {
+                const displayBook = {};
+                displayBook.id = book.id;
+                displayBook.title = book.title;
+                displayBook.author = book.author;
+                displayBook.price = book.price;
+                addBookToTable(displayBook);
+            }
+        }
+
+        function processCreateResponse(result) {
+            const displayBook = {};
+            displayBook.id = result.id;
+            displayBook.title = result.title;
+            displayBook.author = result.author;
+            displayBook.price = result.price;
+
+            addBookToTable(displayBook);
+            clearForm();
+            showViewAll();
+        }
+
+        function processUpdateResponse(result) {
+            const displayBook = {};
+            displayBook.id = result.id;
+            displayBook.title = result.title;
+            displayBook.author = result.author;
+            displayBook.price = result.price;
+
+            const rowElement = document.getElementById(displayBook.id);
+            setBookInRow(rowElement, displayBook);
+
+            clearForm();
+            showViewAll();
+        }
+
+        function processDeleteResponse(result, id) {
+            const rowElement = document.getElementById(id);
+            if (rowElement) {
+                rowElement.remove();
+            }
+            showViewAll();
+        }
+
+        getAll(processGetAllResponse);
+    </script>
+
+</body>
+</html>

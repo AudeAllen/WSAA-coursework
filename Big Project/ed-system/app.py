@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, request
-from models import db, Patient, Admission
+from models import db, Patient
 
 app = Flask(__name__)
 
@@ -14,26 +14,45 @@ def home():
     return render_template("index.html")
 
 
+@app.route("/add")
+def add_page():
+    return render_template("add_patient.html")
+
+
+@app.route("/patients")
+def patients_page():
+    return render_template("patients.html")
+
+
 @app.route("/api/patients", methods=["GET"])
 def get_patients():
     patients = Patient.query.all()
-    return jsonify([patient.to_dict() for patient in patients])
+    result = []
+
+    for patient in patients:
+        result.append(patient.to_dict())
+
+    return jsonify(result)
+
+
+@app.route("/api/patients/<int:id>", methods=["GET"])
+def get_one_patient(id):
+    patient = Patient.query.get(id)
+
+    if patient is None:
+        return jsonify({"error": "Patient not found"}), 404
+
+    return jsonify(patient.to_dict())
 
 
 @app.route("/api/patients", methods=["POST"])
-def create_patient():
+def add_patient():
     data = request.get_json()
 
-    if not data:
-        return jsonify({"error": "No input data provided"}), 400
+    if data is None:
+        return jsonify({"error": "No data sent"}), 400
 
-    required_fields = ["first_name", "last_name", "dob", "gender", "phone", "address"]
-
-    for field in required_fields:
-        if field not in data or not data[field]:
-            return jsonify({"error": f"{field} is required"}), 400
-
-    patient = Patient(
+    new_patient = Patient(
         first_name=data["first_name"],
         last_name=data["last_name"],
         dob=data["dob"],
@@ -42,11 +61,47 @@ def create_patient():
         address=data["address"]
     )
 
-    db.session.add(patient)
+    db.session.add(new_patient)
     db.session.commit()
 
-    return jsonify(patient.to_dict()), 201
+    return jsonify(new_patient.to_dict()), 201
 
+
+@app.route("/api/patients/<int:id>", methods=["PUT"])
+def update_patient(id):
+    patient = Patient.query.get(id)
+
+    if patient is None:
+        return jsonify({"error": "Patient not found"}), 404
+
+    data = request.get_json()
+
+    if data is None:
+        return jsonify({"error": "No data sent"}), 400
+
+    patient.first_name = data.get("first_name", patient.first_name)
+    patient.last_name = data.get("last_name", patient.last_name)
+    patient.dob = data.get("dob", patient.dob)
+    patient.gender = data.get("gender", patient.gender)
+    patient.phone = data.get("phone", patient.phone)
+    patient.address = data.get("address", patient.address)
+
+    db.session.commit()
+
+    return jsonify(patient.to_dict())
+
+
+@app.route("/api/patients/<int:id>", methods=["DELETE"])
+def delete_patient(id):
+    patient = Patient.query.get(id)
+
+    if patient is None:
+        return jsonify({"error": "Patient not found"}), 404
+
+    db.session.delete(patient)
+    db.session.commit()
+
+    return jsonify({"message": "Patient deleted"})
 
 if __name__ == "__main__":
     with app.app_context():
