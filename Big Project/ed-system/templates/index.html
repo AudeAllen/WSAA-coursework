@@ -4,38 +4,114 @@
 
 {% block content %}
 <div class="hero">
-    <h1>🏥 Emergency Department System</h1>
-    <p>Streamlined Patient Admission and Triage Management</p>
+    <div class="hero-content">
+        <h1 class="animate-fade-in">🏥 Emergency Department System</h1>
+        <p class="animate-slide-up">Streamlined Patient Admission and Triage Management</p>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number" id="totalPatients">0</span>
+                <span class="stat-label">Total Patients</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="activePatients">0</span>
+                <span class="stat-label">Active Cases</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="todayAdmissions">0</span>
+                <span class="stat-label">Today's Admissions</span>
+            </div>
+        </div>
+    </div>
+    <div class="hero-image">
+        <div class="floating-icon">🚑</div>
+        <div class="floating-icon delay-1">👨‍⚕️</div>
+        <div class="floating-icon delay-2">💊</div>
+    </div>
 </div>
 
 <div class="features">
-    <div class="feature-box">
+    <div class="feature-box animate-on-scroll">
         <div class="feature-icon">📋</div>
         <h3>Quick Registration</h3>
         <p>Rapidly register new patients with an intuitive form designed for efficiency in emergency situations.</p>
     </div>
 
-    <div class="feature-box">
+    <div class="feature-box animate-on-scroll">
         <div class="feature-icon">👥</div>
         <h3>Patient Management</h3>
         <p>View, manage, and track all patient information in one centralized, easy-to-access location.</p>
     </div>
 
-    <div class="feature-box">
+    <div class="feature-box animate-on-scroll">
         <div class="feature-icon">⚡</div>
         <h3>Fast & Reliable</h3>
         <p>Experience quick response times and reliable data management for critical patient care.</p>
     </div>
 
-    <div class="feature-box">
+    <div class="feature-box animate-on-scroll">
         <div class="feature-icon">🔒</div>
         <h3>Secure System</h3>
         <p>All patient data is handled with care and security protocols to ensure privacy compliance.</p>
     </div>
 </div>
 
+<div class="quick-actions">
+    <h3>Quick Actions</h3>
+    <div class="action-buttons">
+        <a href="/add" class="action-btn primary">
+            <span class="action-icon">➕</span>
+            <span class="action-text">Add New Patient</span>
+        </a>
+        <a href="/patients" class="action-btn secondary">
+            <span class="action-icon">👥</span>
+            <span class="action-text">View All Patients</span>
+        </a>
+    </div>
+</div>
+
 <div style="text-align: center; margin-top: 3rem;">
     <p style="color: #666; font-size: 1.1rem;">Ready to get started?</p>
-    <a href="/add" class="btn btn-primary" style="display: inline-block; padding: 1rem 2rem; margin-top: 1rem;">Add Your First Patient</a>
+    <a href="/add" class="btn btn-primary animate-pulse" style="display: inline-block; padding: 1rem 2rem; margin-top: 1rem;">Add Your First Patient</a>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function loadStats() {
+    fetch("/api/patients")
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('totalPatients').textContent = data.length;
+            document.getElementById('activePatients').textContent = data.length; // For now, all are active
+            
+            // Count today's admissions (simplified - in real app would check created_at date)
+            const today = new Date().toISOString().split('T')[0];
+            const todayAdmissions = data.filter(patient => patient.created_at && patient.created_at.startsWith(today)).length;
+            document.getElementById('todayAdmissions').textContent = todayAdmissions;
+        })
+        .catch(error => {
+            console.error('Error loading stats:', error);
+        });
+}
+
+// Intersection Observer for scroll animations
+function initScrollAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadStats();
+    initScrollAnimations();
+});
+</script>
 {% endblock %}
