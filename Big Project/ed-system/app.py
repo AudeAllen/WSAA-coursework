@@ -79,12 +79,19 @@ def update_patient(id):
     if data is None:
         return jsonify({"error": "No data sent"}), 400
 
-    patient.first_name = data.get("first_name", patient.first_name)
-    patient.last_name = data.get("last_name", patient.last_name)
-    patient.dob = data.get("dob", patient.dob)
-    patient.gender = data.get("gender", patient.gender)
-    patient.phone = data.get("phone", patient.phone)
-    patient.address = data.get("address", patient.address)
+    # Only update fields that are provided and not empty
+    if "first_name" in data and data["first_name"].strip():
+        patient.first_name = data["first_name"]
+    if "last_name" in data and data["last_name"].strip():
+        patient.last_name = data["last_name"]
+    if "dob" in data and data["dob"].strip():
+        patient.dob = data["dob"]
+    if "gender" in data and data["gender"].strip():
+        patient.gender = data["gender"]
+    if "phone" in data and data["phone"].strip():
+        patient.phone = data["phone"]
+    if "address" in data and data["address"].strip():
+        patient.address = data["address"]
 
     db.session.commit()
 

@@ -50,20 +50,20 @@
         <form id="editForm">
             <input type="hidden" id="edit_id">
             <div class="form-group">
-                <label for="edit_first_name">First Name *</label>
-                <input type="text" id="edit_first_name" placeholder="Enter first name" required>
+                <label for="edit_first_name">First Name</label>
+                <input type="text" id="edit_first_name" placeholder="Enter first name">
             </div>
             <div class="form-group">
-                <label for="edit_last_name">Last Name *</label>
-                <input type="text" id="edit_last_name" placeholder="Enter last name" required>
+                <label for="edit_last_name">Last Name</label>
+                <input type="text" id="edit_last_name" placeholder="Enter last name">
             </div>
             <div class="form-group">
-                <label for="edit_dob">Date of Birth *</label>
-                <input type="date" id="edit_dob" required>
+                <label for="edit_dob">Date of Birth</label>
+                <input type="date" id="edit_dob">
             </div>
             <div class="form-group">
-                <label for="edit_gender">Gender *</label>
-                <select id="edit_gender" required>
+                <label for="edit_gender">Gender</label>
+                <select id="edit_gender">
                     <option value="">Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -72,12 +72,12 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="edit_phone">Phone Number *</label>
-                <input type="tel" id="edit_phone" placeholder="Enter phone number" required>
+                <label for="edit_phone">Phone Number</label>
+                <input type="tel" id="edit_phone" placeholder="Enter phone number">
             </div>
             <div class="form-group">
-                <label for="edit_address">Address *</label>
-                <input type="text" id="edit_address" placeholder="Enter full address" required>
+                <label for="edit_address">Address</label>
+                <input type="text" id="edit_address" placeholder="Enter full address">
             </div>
             <div class="form-actions">
                 <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
@@ -146,20 +146,18 @@ function displayPatients(patients) {
 }
 
 function filterPatients() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
     
     if (!searchTerm) {
         displayPatients(allPatients);
         return;
     }
     
-    const filtered = allPatients.filter(patient => 
-        patient.first_name.toLowerCase().includes(searchTerm) ||
-        patient.last_name.toLowerCase().includes(searchTerm) ||
-        patient.phone.toLowerCase().includes(searchTerm) ||
-        patient.address.toLowerCase().includes(searchTerm) ||
-        patient.gender.toLowerCase().includes(searchTerm)
-    );
+    const filtered = allPatients.filter(patient => {
+        const fullName = `${patient.first_name} ${patient.last_name}`.toLowerCase();
+        const searchString = `${fullName} ${patient.phone} ${patient.address} ${patient.gender} ${patient.dob}`.toLowerCase();
+        return searchString.includes(searchTerm);
+    });
     
     displayPatients(filtered);
 }
@@ -223,9 +221,10 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
         address: document.getElementById('edit_address').value
     };
 
-    const validation = validateForm(formData);
-    if (!validation.valid) {
-        showAlert(validation.message, 'error');
+    // Check if at least one field is provided
+    const hasData = Object.values(formData).some(value => value.trim() !== '');
+    if (!hasData) {
+        showAlert('Please provide at least one field to update.', 'error');
         return;
     }
 
