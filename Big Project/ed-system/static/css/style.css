@@ -678,6 +678,20 @@ tbody tr:last-child td {
     border-top: 1px solid #e0e0e0;
 }
 
+/* Ensure modal is scrollable and always fits on screen */
+.modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Sticky modal header so close button is always visible */
+.modal-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
