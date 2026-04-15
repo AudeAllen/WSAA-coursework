@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Ward Admissions - ED System{% endblock %}
+
+{% block content %}
+<div class="grid-layout two-column-layout">
+    <div class="card">
+        <div class="card-header">
+            <h2>Ward Admissions</h2>
+            <p>Assign a patient to a hospital ward and keep a live log of current admissions.</p>
+        </div>
+
+        <form id="admissionForm">
+            <div class="form-group">
+                <label for="patient_id">Patient *</label>
+                <select id="patient_id" required>
+                    <option value="">Select a patient</option>
+                    {% for patient in patients %}
+                    <option value="{{ patient.id }}">{{ patient.last_name }}, {{ patient.first_name }} (ID {{ patient.id }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="ward_name">Ward *</label>
+                    <input type="text" id="ward_name" placeholder="e.g. Surgical Ward" required maxlength="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="bed_number">Bed Number</label>
+                    <input type="text" id="bed_number" placeholder="e.g. B12" maxlength="20">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="admission_reason">Reason for Admission *</label>
+                <textarea id="admission_reason" placeholder="Clinical reason for moving the patient to the ward" required maxlength="255" rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-submit">Record Admission</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Recent Admissions</h2>
+            <p>Newest ward admissions appear first.</p>
+        </div>
+
+        <div class="table-container" id="admissionsTableContainer" style="display: none;">
+            <table id="admissionsTable">
+                <thead>
+                    <tr>
+                        <th>Patient</th>
+                        <th>Ward</th>
+                        <th>Bed</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th>Admitted</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="empty-state" id="admissionsEmptyState">
+            <p>No ward admissions recorded yet.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function loadAdmissions() {
+    fetch('/api/admissions')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.querySelector('#admissionsTable tbody');
+            const tableContainer = document.getElementById('admissionsTableContainer');
+            const emptyState = document.getElementById('admissionsEmptyState');
+
+            tableBody.innerHTML = '';
+
+            if (!data.length) {
+                tableContainer.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            tableContainer.style.display = 'block';
+            emptyState.style.display = 'none';
+
+            data.forEach(admission => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${admission.patient_name}</td>
+                    <td>${admission.ward_name}</td>
+                    <td>${admission.bed_number || '-'}</td>
+                    <td>${admission.admission_reason}</td>
+                    <td><span class="status-pill">${admission.status}</span></td>
+                    <td>${formatDateTime(admission.admitted_at)}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            showAlert('Error loading admissions', 'error');
+            console.error('Error:', error);
+        });
+}
+
+document.getElementById('admissionForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = {
+        patient_id: document.getElementById('patient_id').value,
+        ward_name: document.getElementById('ward_name').value,
+        bed_number: document.getElementById('bed_number').value,
+        admission_reason: document.getElementById('admission_reason').value
+    };
+
+    const submitBtn = document.querySelector('#admissionForm button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    disableButton(submitBtn);
+
+    fetch('/api/admissions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to record admission');
+        }
+        return response.json();
+    })
+    .then(() => {
+        showAlert('Admission recorded successfully', 'success');
+        document.getElementById('admissionForm').reset();
+        loadAdmissions();
+    })
+    .catch(error => {
+        showAlert('Error recording admission', 'error');
+        console.error('Error:', error);
+    })
+    .finally(() => {
+        enableButton(submitBtn, originalText);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', loadAdmissions);
+</script>
+{% endblock %}

@@ -13,12 +13,16 @@
                 <span class="stat-label">Total Patients</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number" id="activePatients">0</span>
-                <span class="stat-label">Active Cases</span>
+                <span class="stat-number" id="activeAdmissions">0</span>
+                <span class="stat-label">Active Admissions</span>
             </div>
             <div class="stat-item">
                 <span class="stat-number" id="todayAdmissions">0</span>
                 <span class="stat-label">Today's Admissions</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="todayMedicines">0</span>
+                <span class="stat-label">Medicines Today</span>
             </div>
         </div>
     </div>
@@ -49,9 +53,15 @@
     </div>
 
     <div class="feature-box animate-on-scroll">
-        <div class="feature-icon">🔒</div>
-        <h3>Secure System</h3>
-        <p>All patient data is handled with care and security protocols to ensure privacy compliance.</p>
+        <div class="feature-icon">🛏️</div>
+        <h3>Ward Tracking</h3>
+        <p>Track which patients have been admitted, where they were placed, and why they were moved.</p>
+    </div>
+
+    <div class="feature-box animate-on-scroll">
+        <div class="feature-icon">💊</div>
+        <h3>Medication Log</h3>
+        <p>Capture medicine administrations with dose, route, and clinician details for safer handover.</p>
     </div>
 </div>
 
@@ -66,6 +76,14 @@
             <span class="action-icon">👥</span>
             <span class="action-text">View All Patients</span>
         </a>
+        <a href="/admissions" class="action-btn tertiary">
+            <span class="action-icon">🛏️</span>
+            <span class="action-text">Record Ward Admission</span>
+        </a>
+        <a href="/medications" class="action-btn accent">
+            <span class="action-icon">💊</span>
+            <span class="action-text">Log Medicine</span>
+        </a>
     </div>
 </div>
 
@@ -78,16 +96,13 @@
 {% block scripts %}
 <script>
 function loadStats() {
-    fetch("/api/patients")
+    fetch("/api/dashboard")
         .then(response => response.json())
         .then(data => {
-            document.getElementById('totalPatients').textContent = data.length;
-            document.getElementById('activePatients').textContent = data.length; // For now, all are active
-            
-            // Count today's admissions (simplified - in real app would check created_at date)
-            const today = new Date().toISOString().split('T')[0];
-            const todayAdmissions = data.filter(patient => patient.created_at && patient.created_at.startsWith(today)).length;
-            document.getElementById('todayAdmissions').textContent = todayAdmissions;
+            document.getElementById('totalPatients').textContent = data.total_patients;
+            document.getElementById('activeAdmissions').textContent = data.active_admissions;
+            document.getElementById('todayAdmissions').textContent = data.todays_admissions;
+            document.getElementById('todayMedicines').textContent = data.todays_medicines;
         })
         .catch(error => {
             console.error('Error loading stats:', error);

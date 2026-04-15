@@ -38,3 +38,17 @@ function enableButton(button, originalText) {
     button.disabled = false;
     button.textContent = originalText;
 }
+
+function formatDateTime(value) {
+    if (!value) {
+        return '-';
+    }
+
+    const parsedDate = new Date(value);
+
+    if (Number.isNaN(parsedDate.getTime())) {
+        return value;
+    }
+
+    return parsedDate.toLocaleString();
+}
