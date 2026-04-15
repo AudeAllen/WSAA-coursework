@@ -12,6 +12,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 
 
+# Page routes render the main UI views.
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -39,6 +40,7 @@ def medications_page():
     return render_template("medications.html", patients=patients)
 
 
+# Helper to normalize required text fields from incoming JSON.
 def get_required_text(data, field_name):
     value = data.get(field_name)
 
@@ -57,6 +59,7 @@ def get_patient_or_404(patient_id):
     return patient, None
 
 
+# Dashboard endpoint returns quick summary numbers for the home page cards.
 @app.route("/api/dashboard", methods=["GET"])
 def get_dashboard_stats():
     total_patients = Patient.query.count()
@@ -80,6 +83,7 @@ def get_dashboard_stats():
     )
 
 
+# Patient CRUD endpoints.
 @app.route("/api/patients", methods=["GET"])
 def get_patients():
     patients = Patient.query.all()
@@ -167,6 +171,7 @@ def delete_patient(id):
     return jsonify({"message": "Patient deleted"})
 
 
+# Ward admission log endpoints.
 @app.route("/api/admissions", methods=["GET"])
 def get_admissions():
     admissions = WardAdmission.query.order_by(WardAdmission.admitted_at.desc()).all()
@@ -208,6 +213,7 @@ def add_admission():
     return jsonify(admission.to_dict()), 201
 
 
+# Medication administration log endpoints.
 @app.route("/api/medications", methods=["GET"])
 def get_medications():
     medications = MedicineAdministration.query.order_by(
@@ -258,3 +264,11 @@ if __name__ == "__main__":
     with app.app_context():
         db.create_all()
     app.run(debug=True)
+
+# References:
+# - AI assistance: GitHub Copilot (GPT-5.3-Codex)
+# - Flask documentation: https://flask.palletsprojects.com/
+# - Flask-SQLAlchemy documentation: https://flask-sqlalchemy.palletsprojects.com/
+# - SQLAlchemy ORM documentation: https://docs.sqlalchemy.org/
+# - W3Schools Python tutorial: https://www.w3schools.com/python/
+# - PythonAnywhere help docs: https://help.pythonanywhere.com/

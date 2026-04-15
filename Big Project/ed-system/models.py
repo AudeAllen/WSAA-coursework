@@ -4,6 +4,7 @@ from datetime import datetime
 db = SQLAlchemy()
 
 
+# Core patient profile table used throughout the app.
 class Patient(db.Model):
     __tablename__ = "patients"
 
@@ -81,6 +82,7 @@ class MedicineAdministration(db.Model):
     notes = db.Column(db.String(255), nullable=True)
     administered_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
 
+    # Each medication event belongs to one patient.
     patient = db.relationship("Patient", back_populates="medicine_administrations")
 
     def to_dict(self):
@@ -95,3 +97,10 @@ class MedicineAdministration(db.Model):
             "notes": self.notes,
             "administered_at": self.administered_at.isoformat(),
         }
+
+# References:
+# - AI assistance: GitHub Copilot (GPT-5.3-Codex)
+# - Flask-SQLAlchemy documentation: https://flask-sqlalchemy.palletsprojects.com/
+# - SQLAlchemy ORM relationships: https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html
+# - W3Schools SQL tutorial: https://www.w3schools.com/sql/
+# - Real Python SQLAlchemy guide: https://realpython.com/python-sqlite-sqlalchemy/

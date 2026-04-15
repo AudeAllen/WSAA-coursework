@@ -73,6 +73,7 @@
 
 {% block scripts %}
 <script>
+// Fetch and render the admissions log table.
 function loadAdmissions() {
     fetch('/api/admissions')
         .then(response => response.json())
@@ -111,6 +112,7 @@ function loadAdmissions() {
         });
 }
 
+    // Submit a new admission, then refresh the log.
 document.getElementById('admissionForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -152,6 +154,15 @@ document.getElementById('admissionForm').addEventListener('submit', function(e) 
     });
 });
 
+// Load existing admissions when the page is ready.
 document.addEventListener('DOMContentLoaded', loadAdmissions);
 </script>
 {% endblock %}
+
+<!-- References:
+- AI assistance: GitHub Copilot (GPT-5.3-Codex)
+- MDN Fetch API: https://developer.mozilla.org/docs/Web/API/Fetch_API
+- MDN templates and strings: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals
+- W3Schools JavaScript tutorial: https://www.w3schools.com/js/
+- W3Schools HTML forms: https://www.w3schools.com/html/html_forms.asp
+-->

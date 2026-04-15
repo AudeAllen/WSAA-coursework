@@ -49,3 +49,16 @@ The app uses SQLite through Flask-SQLAlchemy. Missing tables are created automat
 This website is hosted on PythonAnywhere:
 
 - https://audeallen.pythonanywhere.com/
+
+## References
+
+- AI assistance: GitHub Copilot (GPT-5.3-Codex)
+- Flask documentation: https://flask.palletsprojects.com/
+- Flask-SQLAlchemy documentation: https://flask-sqlalchemy.palletsprojects.com/
+- SQLAlchemy documentation: https://docs.sqlalchemy.org/
+- PythonAnywhere help docs: https://help.pythonanywhere.com/
+- W3Schools Python tutorial: https://www.w3schools.com/python/
+- W3Schools SQL tutorial: https://www.w3schools.com/sql/
+- W3Schools JavaScript tutorial: https://www.w3schools.com/js/
+- W3Schools HTML tutorial: https://www.w3schools.com/html/
+- W3Schools CSS tutorial: https://www.w3schools.com/css/

@@ -52,3 +52,10 @@ function formatDateTime(value) {
 
     return parsedDate.toLocaleString();
 }
+
+// References:
+// - AI assistance: GitHub Copilot (GPT-5.3-Codex)
+// - MDN JavaScript guide: https://developer.mozilla.org/docs/Web/JavaScript/Guide
+// - MDN Date object: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date
+// - W3Schools JavaScript tutorial: https://www.w3schools.com/js/
+// - W3Schools DOM tutorial: https://www.w3schools.com/js/js_htmldom.asp
