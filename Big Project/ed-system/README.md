@@ -1,6 +1,6 @@
 # ED System
 
-Simple Flask and SQLite emergency department system for managing patients and related clinical activity.
+Simple Flask and SQLite emergency department system for managing patients and related clinical activity - Audrey Allen
 
 ## Features
 
