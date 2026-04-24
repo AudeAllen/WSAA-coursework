@@ -39,15 +39,21 @@ This is an API that simulates dealing a deck of cards<br />
 
 Write a program that "deals" (prints out) 5 cards<br /> 
 
+Program for this assignment is assignment2-carddraw.ipynb<br /> 
+
 ======
 ### ***Assignment 03 Read CSO URL***
 
 Write a program that retrieves the dataset for the "exchequer account (historical series)" from the CSO, and stores it into a file called "cso.json"
 
+Program for this assignment is assignment03-cso.ipynb<br />
+
 ======
 ### ***Assignment 04 Authentication***
 
 Write a program in python that will read a file from a repository and then replace all the instances of the text "Andrew" with your name. 
+
+Program for this assignment is assignment04-github.ipynb<br />
 
 
 
