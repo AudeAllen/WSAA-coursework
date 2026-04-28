@@ -173,13 +173,19 @@ function deletePatient(id) {
     fetch("/api/patients/" + id, {
         method: "DELETE"
     })
-    .then(response => response.json())
+    .then(async response => {
+        if (!response.ok) {
+            const errorMessage = await parseApiError(response, 'Error deleting patient');
+            throw new Error(errorMessage);
+        }
+        return response.json();
+    })
     .then(data => {
         showAlert('Patient deleted successfully', 'success');
         loadPatients();
     })
     .catch(error => {
-        showAlert('Error deleting patient', 'error');
+        showAlert(`Error deleting patient: ${error.message}`, 'error');
         console.error('Error:', error);
     });
 }
@@ -235,8 +241,11 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
         },
         body: JSON.stringify(formData)
     })
-    .then(response => {
-        if (!response.ok) throw new Error('Failed to update patient');
+    .then(async response => {
+        if (!response.ok) {
+            const errorMessage = await parseApiError(response, 'Failed to update patient');
+            throw new Error(errorMessage);
+        }
         return response.json();
     })
     .then(data => {
@@ -245,7 +254,7 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
         loadPatients();
     })
     .catch(error => {
-        showAlert('❌ Error updating patient. Please try again.', 'error');
+        showAlert(`❌ ${error.message}`, 'error');
         console.error('Error:', error);
     });
 });

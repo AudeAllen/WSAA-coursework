@@ -88,8 +88,11 @@ document.getElementById("patientForm").addEventListener("submit", function(e) {
         },
         body: JSON.stringify(formData)
     })
-    .then(res => {
-        if (!res.ok) throw new Error('Failed to add patient');
+    .then(async res => {
+        if (!res.ok) {
+            const errorMessage = await parseApiError(res, 'Failed to add patient');
+            throw new Error(errorMessage);
+        }
         return res.json();
     })
     .then(data => {
@@ -100,7 +103,7 @@ document.getElementById("patientForm").addEventListener("submit", function(e) {
         }, 1500);
     })
     .catch(error => {
-        showAlert('❌ Error registering patient. Please try again.', 'error');
+        showAlert(`❌ ${error.message}`, 'error');
         enableButton(submitBtn, originalText);
         console.error('Error:', error);
     });

@@ -24,8 +24,38 @@ function validateForm(formData) {
             return { valid: false, message: `${field.replace('_', ' ').toUpperCase()} is required.` };
         }
     }
+
+    const parsedDob = new Date(formData.dob);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (Number.isNaN(parsedDob.getTime())) {
+        return { valid: false, message: 'DOB must be a valid date.' };
+    }
+
+    if (parsedDob > today) {
+        return { valid: false, message: 'DOB cannot be in the future.' };
+    }
+
+    const digitsOnly = formData.phone.replace(/\D/g, '');
+    if (digitsOnly.length < 7) {
+        return { valid: false, message: 'Phone number must include at least 7 digits.' };
+    }
     
     return { valid: true };
+}
+
+async function parseApiError(response, fallbackMessage) {
+    try {
+        const payload = await response.json();
+        if (payload && payload.error) {
+            return payload.error;
+        }
+    } catch (error) {
+        // Ignore JSON parse failures and use fallback.
+    }
+
+    return fallbackMessage;
 }
 
 // Disable buttons after submission to prevent double submission

@@ -1,6 +1,8 @@
+import re
 from datetime import date
 
 from flask import Flask, render_template, jsonify, request
+from sqlalchemy.exc import SQLAlchemyError
 
 from models import db, Patient, WardAdmission, MedicineAdministration
 
@@ -10,6 +12,9 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///ed_system.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
+
+ALLOWED_GENDERS = {"Male", "Female", "Other", "Prefer not to say"}
+PHONE_ALLOWED_PATTERN = re.compile(r"^[0-9+\-\s()]+$")
 
 
 # Page routes render the main UI views.
@@ -57,6 +62,99 @@ def get_patient_or_404(patient_id):
         return None, (jsonify({"error": "Patient not found"}), 404)
 
     return patient, None
+
+
+def validate_dob(raw_dob):
+    dob_text = str(raw_dob).strip() if raw_dob is not None else ""
+
+    if not dob_text:
+        return None, "dob is required"
+
+    try:
+        parsed_dob = date.fromisoformat(dob_text)
+    except ValueError:
+        return None, "dob must be a valid date in YYYY-MM-DD format"
+
+    today = date.today()
+    if parsed_dob > today:
+        return None, "dob cannot be in the future"
+
+    if parsed_dob < date(1900, 1, 1):
+        return None, "dob is out of allowed range"
+
+    return parsed_dob.isoformat(), None
+
+
+def validate_phone(raw_phone):
+    phone_text = str(raw_phone).strip() if raw_phone is not None else ""
+
+    if not phone_text:
+        return None, "phone is required"
+
+    if len(phone_text) > 20:
+        return None, "phone must be 20 characters or fewer"
+
+    if not PHONE_ALLOWED_PATTERN.fullmatch(phone_text):
+        return None, "phone contains invalid characters"
+
+    digit_count = sum(ch.isdigit() for ch in phone_text)
+    if digit_count < 7:
+        return None, "phone must include at least 7 digits"
+
+    return phone_text, None
+
+
+def validate_patient_payload(data, partial=False):
+    if data is None:
+        return None, "No data sent"
+
+    clean_data = {}
+
+    string_fields = {
+        "first_name": 100,
+        "last_name": 100,
+        "address": 200,
+    }
+
+    for field_name, max_length in string_fields.items():
+        if field_name not in data:
+            if not partial:
+                return None, f"{field_name} is required"
+            continue
+
+        value = get_required_text(data, field_name)
+        if value is None:
+            return None, f"{field_name} is required"
+
+        if len(value) > max_length:
+            return None, f"{field_name} must be {max_length} characters or fewer"
+
+        clean_data[field_name] = value
+
+    if "dob" in data or not partial:
+        dob_value, dob_error = validate_dob(data.get("dob"))
+        if dob_error:
+            return None, dob_error
+        clean_data["dob"] = dob_value
+
+    if "gender" in data or not partial:
+        gender = get_required_text(data, "gender")
+        if gender is None:
+            return None, "gender is required"
+        if gender not in ALLOWED_GENDERS:
+            return None, "gender must be one of: Male, Female, Other, Prefer not to say"
+        clean_data["gender"] = gender
+
+    if "phone" in data or not partial:
+        phone_value, phone_error = validate_phone(data.get("phone"))
+        if phone_error:
+            return None, phone_error
+        clean_data["phone"] = phone_value
+
+    if partial and not clean_data:
+        return None, "No valid fields provided for update"
+
+    return clean_data, None
 
 
 # Dashboard endpoint returns quick summary numbers for the home page cards.
@@ -109,20 +207,25 @@ def get_one_patient(id):
 def add_patient():
     data = request.get_json()
 
-    if data is None:
-        return jsonify({"error": "No data sent"}), 400
+    clean_data, validation_error = validate_patient_payload(data, partial=False)
+    if validation_error:
+        return jsonify({"error": validation_error}), 400
 
     new_patient = Patient(
-        first_name=data["first_name"],
-        last_name=data["last_name"],
-        dob=data["dob"],
-        gender=data["gender"],
-        phone=data["phone"],
-        address=data["address"]
+        first_name=clean_data["first_name"],
+        last_name=clean_data["last_name"],
+        dob=clean_data["dob"],
+        gender=clean_data["gender"],
+        phone=clean_data["phone"],
+        address=clean_data["address"],
     )
 
-    db.session.add(new_patient)
-    db.session.commit()
+    try:
+        db.session.add(new_patient)
+        db.session.commit()
+    except SQLAlchemyError:
+        db.session.rollback()
+        return jsonify({"error": "Unable to save patient at this time"}), 500
 
     return jsonify(new_patient.to_dict()), 201
 
@@ -136,24 +239,18 @@ def update_patient(id):
 
     data = request.get_json()
 
-    if data is None:
-        return jsonify({"error": "No data sent"}), 400
+    clean_data, validation_error = validate_patient_payload(data, partial=True)
+    if validation_error:
+        return jsonify({"error": validation_error}), 400
 
-    # Only update fields that are provided and not empty
-    if "first_name" in data and data["first_name"].strip():
-        patient.first_name = data["first_name"]
-    if "last_name" in data and data["last_name"].strip():
-        patient.last_name = data["last_name"]
-    if "dob" in data and data["dob"].strip():
-        patient.dob = data["dob"]
-    if "gender" in data and data["gender"].strip():
-        patient.gender = data["gender"]
-    if "phone" in data and data["phone"].strip():
-        patient.phone = data["phone"]
-    if "address" in data and data["address"].strip():
-        patient.address = data["address"]
+    for field_name, value in clean_data.items():
+        setattr(patient, field_name, value)
 
-    db.session.commit()
+    try:
+        db.session.commit()
+    except SQLAlchemyError:
+        db.session.rollback()
+        return jsonify({"error": "Unable to update patient at this time"}), 500
 
     return jsonify(patient.to_dict())
 
@@ -165,8 +262,12 @@ def delete_patient(id):
     if patient is None:
         return jsonify({"error": "Patient not found"}), 404
 
-    db.session.delete(patient)
-    db.session.commit()
+    try:
+        db.session.delete(patient)
+        db.session.commit()
+    except SQLAlchemyError:
+        db.session.rollback()
+        return jsonify({"error": "Unable to delete patient at this time"}), 500
 
     return jsonify({"message": "Patient deleted"})
 
